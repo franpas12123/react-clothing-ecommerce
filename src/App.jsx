@@ -1,11 +1,16 @@
+import { Routes, Route } from 'react-router'
 import Home from '@/routes/home/home.component'
+import Navigation from '@/routes/navigation/navigation.component'
+import SignIn from '@/routes/sign-in/sign-in.component'
 
 const App = () => {
-
   return (
-    <>
-      <Home />
-    </>
+    <Routes>
+      <Route path='/' element={<Navigation />}>
+        <Route index element={<Home />}></Route>
+        <Route path='/sign-in' element={<SignIn />}></Route>
+      </Route>
+    </Routes>
   )
 }
 
