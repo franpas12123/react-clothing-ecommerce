@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 import {
   signInWithGooglePopup,
-  createUserDocumentFromAuth,
   signInAuthWithEmailAndPassword
 } from '@/utils/firebase'
 
@@ -13,8 +12,7 @@ import './sign-in-form.styles.scss'
 
 const SignInForm = () => {
   const handleSignInWithPopup = async () => {
-    const { user } = await signInWithGooglePopup()
-    await createUserDocumentFromAuth(user)
+    await signInWithGooglePopup()
   }
 
   const onChangeHandler = (e) => {
@@ -38,12 +36,14 @@ const SignInForm = () => {
     e.preventDefault()
 
     try {
-      const res = await signInAuthWithEmailAndPassword(
+      const { user } = await signInAuthWithEmailAndPassword(
         formFields.email,
         formFields.password
       )
 
-      if (res) resetFormFields()
+      if (user) {
+        resetFormFields()
+      }
     } catch (error) {
       console.error(error)
     }

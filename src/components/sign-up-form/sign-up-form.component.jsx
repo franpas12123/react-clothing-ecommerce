@@ -33,9 +33,9 @@ const SignUpForm = () => {
     }
 
     try {
-      const res = await createAuthUserWithEmailAndPassword(email, password)
-      if (res) {
-        await createUserDocumentFromAuth(res.user, { displayName })
+      const { user } = await createAuthUserWithEmailAndPassword(email, password)
+      if (user) {
+        await createUserDocumentFromAuth(user, { displayName })
         resetForm()
       }
     } catch (error) {
@@ -63,7 +63,7 @@ const SignUpForm = () => {
         />
 
         <FormInput
-          label="Email"
+          label='Email'
           type='email'
           name='email'
           value={email}
@@ -72,7 +72,7 @@ const SignUpForm = () => {
         />
 
         <FormInput
-          label="Password"
+          label='Password'
           type='password'
           name='password'
           value={password}
@@ -81,7 +81,7 @@ const SignUpForm = () => {
         />
 
         <FormInput
-          label="Confirm Password"
+          label='Confirm Password'
           type='password'
           name='confirmPassword'
           value={confirmPassword}
